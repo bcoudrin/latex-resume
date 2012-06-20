@@ -14,7 +14,7 @@
 \documentclass[11pt,a4paper]{article}%
 %
 % Packages
-\usepackage[colorlinks, breaklinks, pdftitle={Benjamin Coudrin},pdfauthor={Coudrin, Benjamin}]{hyperref}%
+\usepackage[unicode,colorlinks,urlcolor=blue,breaklinks,pdftitle={Benjamin Coudrin},pdfauthor={Coudrin, Benjamin}]{hyperref}%
 \usepackage{xunicode}%
 \usepackage{xltxtra}%
 \usepackage{graphics}%
@@ -22,9 +22,9 @@
 \setmainfont[Mapping=tex-text]{Calluna}%
 %
 \usepackage{tikz}%
+\usetikzlibrary{calc}%
 \usepackage{color}%
 \usepackage{array}%
-\usepackage{picins}%
 %
 % Custom commands
 \newcommand{\old}[1]{\fontspec[Alternate=1,Ligatures={Common, Rare}]{Calluna}\fontsize{24pt}{30pt}\selectfont #1}%
@@ -38,23 +38,43 @@
 %
 % Contacts watermark
 \begin{tikzpicture}[remember picture,overlay]%
-	\node [scale=4,text opacity=0.15,xshift=1.55cm,yshift=-0.4cm] at (current page.north west) {\old contacts};%
+	\coordinate (O) at (current page.south west);
+	\coordinate (C) at ($ (O) + (6.24cm,28.1cm)$);
+	%\node [scale=4,text opacity=0.15,xshift=1.55cm,yshift=-0.4cm] at (current page.north west) {\old contacts};%
+	\node [scale=3.9,text opacity=0.15] at (C) {\old contacts};%
 \end{tikzpicture}%
 %
 % Contacts
-\begin{tabular}{lcl}%
-	\multicolumn{1}{c}{\color{orange} 1.0}                             &  & \multicolumn{1}{c}{\color{orange} 2.0} \\%
-	                                                                      &  &                                        \\%
-	83 av. de Lespinet, 31400 Toulouse                                    &  & \parpic{\includegraphics[width=16pt]{linkedin-icon}} \href{http://fr.linkedin.com/pub/benjamin-coudrin/10/700/271}{LinkedIn profile}\\%
-	{\color{orange} Tel.} 06.09.11.00.83                                 &  & test                        \\%
-	\href{mailto:benjamin.coudrin@gmail.com}{benjamin.coudrin@gmail.com} &  & test                        \\%
-	{\color{orange} born} 09/18/1983                                     &  & test                        \\%
-\end{tabular}%
+\newcolumntype{M}[1]{>{\raggedright}m{#1}}%
+\begin{tikzpicture}[remember picture,overlay]%
+	\coordinate (O) at (current page.south west);
+	\coordinate (C) at ($ (O) + (7.35cm,27.35cm)$);
+	\node at (C) {
+		\begin{tabular}{lm{23pt}l}%
+		  \multicolumn{1}{c}{\color{orange} 1.0}                             &  & \multicolumn{1}{c}{\color{orange} 2.0} \\%
+                                                                         &  &                                        \\%
+			\begin{tabular}{l}%
+				83 av. de Lespinet, 31400 Toulouse                                   \\%
+				{\color{orange} Tel.} 06.09.11.00.83                                 \\%
+				\href{mailto:benjamin.coudrin@gmail.com}{benjamin.coudrin@gmail.com} \\%
+				{\color{orange} born} 09/18/1983                                     \\%
+			\end{tabular} & &%
+			\begin{tabular}{M{16pt}l}%
+				\includegraphics[width=16pt]{linkedin-icon}       & \href{http://fr.linkedin.com/pub/benjamin-coudrin/10/700/271}{LinkedIn profile} \\%
+				\includegraphics[width=16pt]{36x36}               & \href{http://viadeo.com/s/W7GqS}{Viadeo profile}                                \\%
+				\includegraphics[width=16pt]{logo_square_twitter} & \href{https://twitter.com/#!/bcoudrin}{Twitter timeline}                        \\%
+			\end{tabular}%
+		\end{tabular}%
+	};
+\end{tikzpicture}%
 %
 % Photo
 \setlength{\fboxsep}{0pt}%
 \begin{tikzpicture}[remember picture,overlay]%
-	\node [xshift=-2.6cm,yshift=-2.6cm] at (current page.north east) {\fbox{\includegraphics[height=4.3cm]{photo_3d}}};%
+	\coordinate (O) at (current page.south west);
+	\coordinate (C) at ($ (O) + (18.5cm,27cm)$);
+	%\node [xshift=-2.6cm,yshift=-2.6cm] at (current page.north east) {\fbox{\includegraphics[height=4.3cm]{photo_3d}}};%
+	\node at (C) {\fbox{\includegraphics[height=4.3cm]{photo_3d}}};%
 \end{tikzpicture}%
 %
 \end{document}%
